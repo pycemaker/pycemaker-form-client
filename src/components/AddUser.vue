@@ -14,21 +14,25 @@
             type="text"
             placeholder="Digite seu nome"
             v-model="usuario.name"
+            required
           />
           <input
             type="email"
             placeholder="Digite seu email"
             v-model="usuario.email"
+            required
           />
           <input
             type="password"
             placeholder="digite sua senha"
             v-model="usuario.password"
+            required
           />
           <input
             type="text"
             placeholder="digite seu telefone"
             v-model="usuario.cellphoneNumber"
+            required
           />
           <button @click="saveUser">
             <h3>CRIAR CONTA</h3>
@@ -55,7 +59,10 @@ export default {
   },
   methods: {
     saveUser() {
-      var data = {
+      if(this.usuario.name === '' || this.usuario.email === '' || this.usuario.password === '' || this.usuario.cellphoneNumber === ''){
+        alert('Os campos estão vazios')
+      }else{
+        var data = {
         name: this.usuario.name,
         email: this.usuario.email,
         password: this.usuario.password,
@@ -72,6 +79,7 @@ export default {
         alert('Erro ao cadastrar !')
       })
       
+      }
     },
   },
 };

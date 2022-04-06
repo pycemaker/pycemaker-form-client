@@ -3,32 +3,62 @@
     <div class="container-table">
       <table>
         <tr class="table-header">
-          <th>#:</th>
+          <th>Id:</th>
           <th>Nome:</th>
           <th>Email:</th>
           <th>telefone:</th>
         </tr>
-        <tr v-for="(user, index) in users" :key="index">
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.cellphoneNumber }}</td>
+        <tr v-for="item in data" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.cellphoneNumber }}</td>
         </tr>
       </table>
+      <!-- <div>
+        <jw-pagination
+          :items="users"
+          @changePage="onChangePage"
+        ></jw-pagination>
+      </div> -->
+      <div class="hello">
+        <VueTailwindPagination
+          :current="currentPage"
+          :total="total"
+          :per-page="perPage"
+          @page-changed="onPageClick($event)"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script>
-import ApiDataServer from "../service/ApiDataServer";
+//import ApiDataServer from "../service/ApiDataServer";
+// import "@ocrv/vue-tailwind-pagination/dist/style.css"
+import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
+
+const users = [...Array(150).keys()].map((i) => ({
+  id: i + 1,
+  name: "Pedro",
+  email: "pedro@gmail.com",
+  cellphoneNumber: "123456122",
+}));
+
 export default {
   name: "ListUser",
+  components: {
+    VueTailwindPagination,
+  },
   data() {
     return {
-      users: [],
+      currentPage: 0,
+      perPage: 20,
+      total: 150,
+      data: users,
     };
   },
   methods: {
-    retrieveUsers() {
+    /*     retrieveUsers() {
       ApiDataServer.getAll()
         .then((res) => {
           this.users = res.data;
@@ -37,10 +67,22 @@ export default {
           alert("Não foi possível carregar a base de dados");
           console.log(e);
         });
+    }, */
+    // onChangePage(pageOfUser) {
+    //   this.pageOfUser = pageOfUser;
+    // },
+    onPageClick(event) {
+      this.currentPage = event;
+      this.getData();
+    },
+    getData() {
+      this.data = users;
     },
   },
-  mounted(){
-      this.retrieveUsers();
+  mounted() {
+    this.currentPage = 1;
+    console.log(users);
+    this.getData();
   },
 };
 </script>
