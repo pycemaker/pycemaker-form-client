@@ -1,8 +1,8 @@
 import http from '../http-common'
 
 class ApiDataServer{
-    getAll(){
-        return http.get('/usuarios');
+    getAll(page, size){
+        return http.get(`/usuario/${page}-${size}`);
     }
     create(data){
         return http.post('/registrar',data)

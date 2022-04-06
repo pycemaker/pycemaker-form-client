@@ -15,77 +15,52 @@
           <td>{{ item.cellphoneNumber }}</td>
         </tr>
       </table>
-      <!-- <div>
-        <jw-pagination
-          :items="users"
-          @changePage="onChangePage"
-        ></jw-pagination>
-      </div> -->
-      <div class="hello">
-        <VueTailwindPagination
-          :current="currentPage"
-          :total="total"
-          :per-page="perPage"
-          @page-changed="onPageClick($event)"
-        />
+      <div>
+        <button :disabled="currentPage === 0" @click="voltar">Voltar</button>
+        <button :disabled="data.length < 20" @click="avancar">Avançar</button>
       </div>
     </div>
   </div>
 </template>
-<script>
-//import ApiDataServer from "../service/ApiDataServer";
-// import "@ocrv/vue-tailwind-pagination/dist/style.css"
-import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
 
-const users = [...Array(150).keys()].map((i) => ({
-  id: i + 1,
-  name: "Pedro",
-  email: "pedro@gmail.com",
-  cellphoneNumber: "123456122",
-}));
+<script>
+import ApiDataServer from "../service/ApiDataServer";
 
 export default {
   name: "ListUser",
-  components: {
-    VueTailwindPagination,
-  },
   data() {
     return {
       currentPage: 0,
-      perPage: 20,
-      total: 150,
-      data: users,
+      data: [],
     };
   },
   methods: {
-    /*     retrieveUsers() {
-      ApiDataServer.getAll()
+    retrieveUsers() {
+      ApiDataServer.getAll(this.currentPage, 20)
         .then((res) => {
-          this.users = res.data;
+          console.log(res.data);
+          this.data = res.data;
         })
         .catch((e) => {
           alert("Não foi possível carregar a base de dados");
           console.log(e);
         });
-    }, */
-    // onChangePage(pageOfUser) {
-    //   this.pageOfUser = pageOfUser;
-    // },
-    onPageClick(event) {
-      this.currentPage = event;
-      this.getData();
     },
-    getData() {
-      this.data = users;
+    voltar() {
+      this.currentPage = this.currentPage - 1;
+      this.retrieveUsers();
+    },
+    avancar() {
+      this.currentPage = this.currentPage + 1;
+      this.retrieveUsers();
     },
   },
   mounted() {
-    this.currentPage = 1;
-    console.log(users);
-    this.getData();
+    this.retrieveUsers();
   },
 };
 </script>
+
 <style scoped>
 .container {
   display: flex;
