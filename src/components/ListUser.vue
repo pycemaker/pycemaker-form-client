@@ -89,6 +89,7 @@ export default {
   border-radius: 50px;
   padding: 70px;
   height: max-content;
+  margin-bottom:50px;
 }
 
 th {
