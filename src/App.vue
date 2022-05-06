@@ -1,4 +1,5 @@
 <template>
+<div>    
   <div class="container-header">
     <div class="logo">
       <a href="/">
@@ -16,12 +17,15 @@
       </router-link>
     </div>
   </div>
-  <router-view/>
+      <router-view/>
+      <notifications position="bottom left" width="300px" max=3 />
+</div>    
 </template>
 <script>
 export default {
   name: "App",
-  components: {},
+  components: {
+  },
 };
 </script>
 
