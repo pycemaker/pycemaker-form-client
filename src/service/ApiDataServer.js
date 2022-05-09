@@ -7,6 +7,9 @@ class ApiDataServer{
     create(data){
         return http.post('/registrar',data)
     }
+    delete(id){
+        return http.delete(`/usuario/delete/${id}`)
+    }
 }
 
 export default new ApiDataServer();
