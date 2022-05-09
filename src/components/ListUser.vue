@@ -11,12 +11,18 @@
             <th>Nome:</th>
             <th>Email:</th>
             <th>telefone:</th>
+            <th>Ações</th>
           </tr>
           <tr v-for="item in data" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.email }}</td>
             <td>{{ item.cellphoneNumber }}</td>
+            <td>
+              <button @click="deleta(item.id)">
+                Deletar
+              </button>
+            </td>
           </tr>
         </table>
         <div>
@@ -30,6 +36,7 @@
 
 <script>
 import ApiDataServer from "../service/ApiDataServer";
+import {notify} from '@kyvg/vue3-notification'
 
 export default {
   name: "ListUser",
@@ -65,6 +72,29 @@ export default {
       this.currentPage = this.currentPage + 1;
       this.retrieveUsers();
     },
+    deleta(id){
+      ApiDataServer.delete(id)
+      .then((res) => {
+        notify({
+          type:'sucess',
+          title:'Sucesso',
+          text:`${res.data}`,
+        })
+        this.retrieveUsers();
+      
+      })
+      .catch((erro) => {
+        console.log(erro)
+          notify({
+          type:'error',
+          title:'Error',
+          text:`Erro ao excluir`,
+        })
+      })
+
+  
+      
+    }
   },
   mounted() {
     this.retrieveUsers();
