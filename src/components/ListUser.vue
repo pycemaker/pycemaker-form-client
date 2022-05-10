@@ -1,4 +1,40 @@
 <template>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- TABLE DO RESPONSIVO -->
+  <div class="d-md-none d-xxl-none">
+  <div class="container-response">
+    <div class="container-table-response">
+      <div v-if="show === false">
+        <p>Nenhum dado encontrado</p>
+      </div>
+      <div v-else>
+        <table>
+          <tr class="table-header-response">
+            <th>Id:</th>
+            <th>Nome:</th>
+            <th>Ações</th>
+          </tr>
+          <tr v-for="item in data" :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>
+              <button>
+                <i class="fa fa-bars"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <button :disabled="currentPage === 0" @click="voltar" class="btn-voltar">&lt; Voltar</button>
+          <button :disabled="data.length < 20" @click="avancar" class="btn-avancar">Avançar &gt;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- FIM DA TABLE RESPONSIVO -->
+  <div class="d-none d-md-block">
   <div class="container">
     <div class="container-table">
       <div v-if="show === false">
@@ -32,6 +68,9 @@
       </div>
     </div>
   </div>
+  </div>
+
+  
 </template>
 
 <script>
@@ -45,6 +84,7 @@ export default {
       currentPage: 0,
       data: [],
       show: false,
+      isResposive: false
     };
   },
   methods: {
@@ -98,7 +138,11 @@ export default {
   },
   mounted() {
     this.retrieveUsers();
-    console.log(this.show)
+    if(window.innerWidth < 700){
+      this.isResposive = true
+    }else{
+      this.isResposive = false
+    }
   },
 };
 </script>
@@ -160,4 +204,19 @@ button:disabled{
 .btn-avancar{
   margin-left: 10px;
 }
+
+@media screen and (max-width: 700px) {
+  .container {
+    display: none;
+  }
+
+  table{
+    margin-top: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+
+} 
+
 </style>

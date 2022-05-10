@@ -161,4 +161,21 @@ button:hover {
   cursor: pointer;
   transform: scale(1.04);
 }
+
+@media screen and (max-width: 600px) {
+
+  .container-form{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .img-form{
+    display: none;
+  }
+  
+}
+
 </style>
