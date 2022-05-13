@@ -19,8 +19,8 @@
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>
-              <button>
-                <i class="fa fa-bars"></i>
+              <button @click="deleta(item.id)">
+                <i class="fa fa-trash"></i>
               </button>
             </td>
           </tr>
