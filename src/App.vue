@@ -140,10 +140,11 @@ h1{
   .responsive{
     position: absolute;
     margin-top: 30px;
-    left: 60%;
+    left: 40%;
     z-index: 10;
     display:flex;
     flex-direction: column;
+    background-color: #f7fff9;
   }
 
   .responsive h2{
