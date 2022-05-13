@@ -24,13 +24,13 @@
           />
           <input
             type="password"
-            placeholder="digite sua senha"
+            placeholder="Digite sua senha"
             v-model="usuario.password"
             required
           />
           <input
             type="text"
-            placeholder="digite seu telefone"
+            placeholder="Digite seu telefone"
             v-model="usuario.cellphoneNumber"
             required
           />
@@ -45,6 +45,7 @@
 
 <script>
 import ApiDataServer from '../service/ApiDataServer'
+import {notify} from '@kyvg/vue3-notification'
 export default {
   name: "add-user",
   data() {
@@ -60,7 +61,11 @@ export default {
   methods: {
     saveUser() {
       if(this.usuario.name === '' || this.usuario.email === '' || this.usuario.password === '' || this.usuario.cellphoneNumber === ''){
-        alert('Os campos estão vazios')
+       notify({
+         type:'warn',
+         title:'Atenção',
+         text:'Alguns campos estão vazios !',
+       })
       }else{
         var data = {
         name: this.usuario.name,
@@ -72,11 +77,20 @@ export default {
          .then(res => {
         console.log(res.data)
         this.usuario = {}
-        alert('Usuário cadastrar com sucesso !!')
+        notify({
+          type:'sucess',
+          title:'Sucesso',
+          text:'Usuário salvo com sucesso !',
+        })
+
       })
       .catch(e => {
         console.log(e)
-        alert('Erro ao cadastrar !')
+        this.$notify({
+          type:'error',
+          title:'Erro',
+          text:'Erro ao cadastrar Usuário !',
+        })
       })
       
       }
@@ -147,4 +161,21 @@ button:hover {
   cursor: pointer;
   transform: scale(1.04);
 }
+
+@media screen and (max-width: 600px) {
+
+  .container-form{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .img-form{
+    display: none;
+  }
+  
+}
+
 </style>
