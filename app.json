@@ -1,0 +1,12 @@
+{
+  "name": "Pycemaker Form Client",
+  "description": "Aplicação Formulário que cadastra e lista usuários",
+  "repository": "https://github.com/pycemaker/pycemaker-form-client",
+  "logo": "https://raw.githubusercontent.com/pycemaker/pycemaker-dashboard-client/main/src/assets/icon.png",
+  "keywords": ["nodejs", "vue"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-static"
+    }
+  ]
+}
