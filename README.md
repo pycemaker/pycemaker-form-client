@@ -55,6 +55,22 @@ $ npm install
 </ul>
 
 <ul>
+<li><b>Criação das Variáveis</b></li>
+<ul>
+<li>Crie um arquivo <b>.env</b> e configure as variáveis a seguir:
+<br/>
+
+```bash
+NPM_CONFIG_PRODUCTION=false
+VUE_APP_BACKEND=url_do_backend
+YARN_PRODUCTION=false
+```
+
+</li>
+</ul>
+</ul>
+
+<ul>
 <li><b>Iniciando o servidor Vue</b></li>
 <ul>
 <li>No pasta raíz do projeto execute o comando para iniciar o vue:
